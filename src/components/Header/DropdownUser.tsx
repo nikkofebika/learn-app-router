@@ -1,9 +1,10 @@
 import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 const DropdownUser = () => {
+  const { data: session } = useSession();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const trigger = useRef<any>(null);
@@ -47,7 +48,7 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+            {session?.user?.name}
           </span>
           <span className="block text-xs">UX Designer</span>
         </span>
@@ -56,12 +57,14 @@ const DropdownUser = () => {
           <Image
             width={112}
             height={112}
-            src={"/images/user/user-01.png"}
+            // src={"/images/user/user-01.png"}
+            src={session?.user?.image ?? "/images/user/user-01.png"}
             style={{
               width: "auto",
               height: "auto",
             }}
             alt="User"
+            className="rounded-full"
           />
         </span>
 

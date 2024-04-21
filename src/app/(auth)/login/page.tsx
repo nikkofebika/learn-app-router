@@ -1,12 +1,26 @@
+"use client";
 import FormInputIcon from "@/components/ui/forms/FormInputIcon";
 import AuthLayout from "@/components/layouts/AuthLayout";
 import Link from "next/link";
 import Button from "@/components/ui/Button";
+import { FormEvent, FormEventHandler } from "react";
+import { signIn } from "next-auth/react";
 
 export default function Login() {
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    const res: any = await signIn("credentials", {
+      redirect: false,
+      email: e.target.email.value,
+      password: e.target.password.value,
+      callbackUrl: '/'
+    });
+    console.log('res',res)
+  }
   return (
     <AuthLayout title="Sign In to Your Account">
-      <form>
+      <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <FormInputIcon label="Email" name="email" type="email" placeholder="Enter your email address">
             <span className="absolute right-4 top-4">
