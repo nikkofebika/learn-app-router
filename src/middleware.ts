@@ -4,7 +4,7 @@ import { NextRequest } from "next/server";
 
 export default withAuth(
     function middleware(req: NextRequest){
-        console.log('req',req.url)
+        console.log('REQUESTTTT',req.url)
     },
     {
     callbacks: {
