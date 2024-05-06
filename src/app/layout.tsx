@@ -1,3 +1,4 @@
+import QueryClientProvider from "@/components/QueryClientProvider";
 import SessionProvider from "@/components/SessionProvider";
 import "@/css/satoshi.css";
 import "@/css/style.css";
@@ -16,14 +17,16 @@ export default async function RootLayout({
 }>) {
   const session = await getServerSession();
   return (
-    <html lang="en">
+    <QueryClientProvider>
+      <html lang="en">
         <body suppressHydrationWarning={true}>
           <SessionProvider session={session}>
-          <div className="dark:bg-boxdark-2 dark:text-bodydark">
-            {children}
-          </div>
+            <div className="dark:bg-boxdark-2 dark:text-bodydark">
+              {children}
+            </div>
           </SessionProvider>
         </body>
-    </html>
+      </html>
+    </QueryClientProvider>
   );
 }

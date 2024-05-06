@@ -4,15 +4,16 @@ export default function FormInputIcon({
     name,
     placeholder,
     children,
-    props
+    ...props
 }: Readonly<{
     label: string;
     type: string;
     name: string;
     placeholder?: string;
     children: React.ReactNode;
-    props: any
+    props?: any
 }>) {
+    console.log('props',props)
     return (
         <>
             <label className="mb-2.5 block font-medium text-black dark:text-white">
